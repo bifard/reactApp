@@ -5,4 +5,5 @@ interface MyArray<T> {
 
 const arr: MyArray<number> = [1,2,3];
 
-console.log(arr.reduce((a,b) => a + b));
+console.log(arr.reduce((a,b):MyArray<number> => ' x'+ a + b));
+console.log(arr.reduce((a,b):MyArray<number> => a + b));
