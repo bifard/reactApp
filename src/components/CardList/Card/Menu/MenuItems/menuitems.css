@@ -1,0 +1,53 @@
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  background-color: var(--white);
+  z-index: 999;
+}
+
+/* MenuItem */
+
+.menuItemsList {
+  padding: 0 20px;
+ 
+}
+.menuItemsList li:last-child div:last-child{
+ display: none;
+ 
+}
+
+.menuItem {
+  padding: 12px 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  cursor: pointer;
+}
+.menuItem:hover span,
+.menuItem:hover svg path,
+.menuItem:hover svg  {
+ color:#CC6633;
+ stroke: #CC6633;
+ fill: #CC6633;
+
+}
+
+.menuItem > svg + span {
+  margin-left: 7px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--greyEC);
+}
+
+.closeButton {
+  background-color: var(--greyD9);
+  padding: 12px 23px;
+  border-radius: 0 0 3px 3px;
+  width: 100%;
+}

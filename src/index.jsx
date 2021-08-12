@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { Header } from './Header';
+import  { App } from './App.tsx';
 
 window.addEventListener('load', () => {
-  ReactDom.render(<Header/>, document.getElementById('react_root'));
+  ReactDom.render(<App/>, document.getElementById('react_root'));
 });
