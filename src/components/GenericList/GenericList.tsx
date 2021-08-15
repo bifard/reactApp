@@ -10,20 +10,22 @@ interface IItem {
   href?: string;
   svg?: React.ReactNode;
   dividerClassName?: string;
+  
 }
 
 interface IGenericListProps{
   list: IItem[];
+  postId?:string;
 }
 
 const noop = () => {}; 
-export function GenericList({list}: IGenericListProps) {
+export function GenericList({list, postId}: IGenericListProps) {
   return (
     <>
       {
         list.map(({As = 'div', text, onClick = noop, className, id, href, svg, dividerClassName}) => (
           <As
-            onClick = {() => onClick(id)}
+            onClick = {() => onClick(postId || id)}
             key = {id}
             href = {href}
           >
@@ -33,7 +35,7 @@ export function GenericList({list}: IGenericListProps) {
               <span>{text}</span> 
             </div>
             {dividerClassName && <div className={dividerClassName}></div>}
-            
+
           </As>
         ))
       }

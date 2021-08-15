@@ -1,54 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { ClaimIcon } from '../../../../../icon/menuIcon/ClaimIcon';
-import { CommentIcon } from '../../../../../icon/menuIcon/CommentIcon';
-import { HideIcon } from '../../../../../icon/menuIcon/HideIcon';
-import { SaveIcon } from '../../../../../icon/menuIcon/SaveIcon';
-import { SharedIcon } from '../../../../../icon/menuIcon/SharedIcon';
+import React, {useState } from 'react';
 import { generateId } from '../../../../../utils/js/generateRandomIndex';
 import { GenericList } from '../../../../GenericList';
+import { EIcons, Icon } from '../../../../Icon';
 import styles from './menuitems.css';
 
 const LIST= [
   {
     text:'Комметарий',
-    svg: <CommentIcon/>,
+    svg: <Icon name={EIcons.comment} size = {15}/>,
     mobilFlag: false,
   },
 
   {
     text:'Поделиться',
-    svg: <SharedIcon/>,
+    svg: <Icon name={EIcons.shared} size = {15}/>,
     mobilFlag: false,
   },
   {
     text:'Скрыть',
-    svg: <HideIcon/>,
+    svg: <Icon name={EIcons.hide} size = {15}/>,
     mobilFlag: true,
   },
   {
     text:'Сохранить',
-    svg: <SaveIcon/>,
+    svg: <Icon name={EIcons.save} size = {15}/>,
     mobilFlag: false,
   },
   {
     text:'Пожаловаться',
-    svg: <ClaimIcon/>,
+    svg: <Icon name={EIcons.claim} size = {15}/>,
     mobilFlag: true,
   },
 ].map(generateId)
 
 
+interface IMenuItemsProps {
+  postId?: string
+}
 
-
-export function MenuItems() {
+export function MenuItems({postId}: IMenuItemsProps) {
   const widthIsMobil = document.documentElement.clientWidth <= 1024;
   const [listMenu, setListMenu] = useState(widthIsMobil ? LIST.filter((item)=> item.mobilFlag === true) : LIST);
 
-  
   return (
     <div className={styles.dropdown}>
       <ul className={styles.menuItemsList}>
-        <GenericList list={listMenu.map(item => 
+        <GenericList postId = {postId} list={listMenu.map(item => 
           ({...item, 
             As:'li', 
             className:`${styles.menuItem}`, 

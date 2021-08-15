@@ -1,8 +1,5 @@
 import React from 'react';
-import { assoc } from '../../../../utils/js/assoc';
-import { generateId } from '../../../../utils/js/generateRandomIndex';
 import { Dropdown } from '../../../Dropdown';
-import { GenericList } from '../../../GenericList';
 import styles from './menu.css';
 import { MenuItems } from './MenuItems';
 
@@ -12,7 +9,7 @@ export function Menu() {
   return (
     <div className={styles.menu}>
       <Dropdown  button ={ButtonMenu()}>
-          <MenuItems />
+          <MenuItems  />
       </Dropdown>
     </div>
     );

@@ -5,24 +5,23 @@ import { Layout } from './components/Layout';
 import { Header } from './components/Header';
 import { Content } from './components/Content';
 import { CardList } from './components/CardList';
-import { generateId, assignId } from './utils/js/generateRandomIndex';
+import { EColor, Text } from './components/Text';
+import { Break } from './components/Break';
+import { Icon, EIcons} from './components/Icon';
+import { ClaimIcon} from './icon/menuIcon/ClaimIcon';
 
 
-const LIST = [
-  {As: 'li' as const,text:'some'},
-  {As: 'li' as const,text:'other some'},
-  {As: 'li' as const,text:'some'}
-].map(generateId)
 
 
 function AppComponent(){
 
 
   return(
-    <Layout>
+    <Layout >
       <Header/>
       <Content>
         <CardList/>
+        <Icon name={EIcons.comment} size={15}></Icon>
       </Content>
     </Layout>
   );

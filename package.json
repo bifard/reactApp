@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/bifard/reactApp#readme",
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
     "@types/jest": "^26.0.24",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
@@ -36,6 +37,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "classnames": "^2.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "win-node-env": "^0.4.0"
