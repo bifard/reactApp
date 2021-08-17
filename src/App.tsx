@@ -9,13 +9,14 @@ import { CardList } from './components/CardList';
 
 function AppComponent(){
   return(
-
+    <BrowserRouter>
       <Layout >
         <Header/>
         <Content>
           <CardList/>
         </Content>
       </Layout>
+    </BrowserRouter>
   );
 }
 
