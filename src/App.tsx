@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import './main.global.css';
 import { hot } from 'react-hot-loader/root';
 import { Layout } from './components/Layout';
@@ -9,17 +9,16 @@ import { CardList } from './components/CardList';
 
 function AppComponent(){
   return(
-    <BrowserRouter>
-      <Layout >
-        <Header/>
+    <Layout >
+      <Header/>
         <Content>
-          <CardList/>
+            <Route exact path="/"  />
+            <Route exact path="/auth" component={CardList} />
         </Content>
-      </Layout>
-    </BrowserRouter>
+    </Layout>
   );
 }
 
+export const App = AppComponent;
 /* export const App = hot(() => <AppComponent/>); */
 
-export const App = AppComponent;
