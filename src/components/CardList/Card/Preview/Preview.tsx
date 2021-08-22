@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { postContext } from '../../../context/postContext';
 import styles from './preview.css';
 
-export function Preview() {
-  const {preview} = useContext(postContext);
+export function Preview({preview}:{preview?:string}) {
+  
   return (
     <div className={styles.preview}>
       {preview && <img 

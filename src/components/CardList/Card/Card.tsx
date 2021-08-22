@@ -5,15 +5,26 @@ import { Controls } from './Controls';
 import { Menu } from './Menu';
 import { Preview } from './Preview';
 
+interface IPropsCard{
+  title?:string;
+  author?:string;
+  preview?:string;
+  authorID?: string;
+  authorAvatar?: string;
+  created_utc?: number;
+  id?: string;
+  like?: number;
+  numComments?: number;
+}
 
-export function Card() {
+export function Card({title, author, preview, authorAvatar, created_utc, id, like, numComments}:IPropsCard) {
   
   return (
     <li className={styles.card}>
-      <TextContent/>
-      <Preview />
+      <TextContent  title ={title} author = {author} authorAvatar = {authorAvatar} created_utc = {created_utc} />
+      <Preview preview = {preview} />
       <Menu/>
-      <Controls/>
+      <Controls like = {like} numComments = {numComments}/>
     </li>
   );
 }

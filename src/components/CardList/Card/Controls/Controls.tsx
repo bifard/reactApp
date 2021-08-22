@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import { thousandToK } from '../../../../utils/js/thousandToK';
-import { postContext } from '../../../context/postContext';
 import styles from './controls.css';
 
-export function Controls() {
-  const {numComments, like} = useContext(postContext)
+interface IPropsControls{
+  like?: number;
+  numComments?: number;
+}
+export function Controls({like, numComments}:IPropsControls) {
+
   return (
     <div className={styles.controls}>
       <div className={styles.karmaCounter}>

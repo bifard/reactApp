@@ -1,22 +1,23 @@
 import React, { useContext } from 'react';
-import { postContext } from '../../../context/postContext';
+import { AuthorPost } from '../AuthorPost';
 import styles from './cardcontent.css';
+interface IPropsTextContent {
+  title?:string;
+  author?:string;
+  authorAvatar?: string;
+  created_utc?: number;
+}
+export function TextContent({authorAvatar, author, created_utc, title}:IPropsTextContent) {
 
-export function TextContent() {
- const {title,author,authorAvatar, created_utc} = useContext(postContext)
   return (
     <div className={styles.textContent}>
       <div className={styles.metaData}>
-      <div className={styles.userLink}>
-        <img  
-          className={styles.avatar} 
-          src={authorAvatar || "https://www.redditstatic.com/avatars/avatar_default_19_0DD3BB.png" }
-          alt="avatar" 
+        <AuthorPost 
+          authorAvatar = {authorAvatar} 
+          author = {author}
         />
-        <a href="#user-url" className={styles.username}>{author}</a>
-      </div>
       <span className={styles.createdAt}>
-        <span className={styles.publishedLabel}>Опублекованно  </span>
+        <span className={styles.publishedLabel}>Опублекованно</span>
         {created_utc} hours ago
       </span>
     </div>
