@@ -4,7 +4,7 @@ import { getTokenFromUrl } from "../utils/js/getTokenFromUrl";
 
 export function useToken() {
   const [token, setToken] = useState('');
-  
+  console.log('token: ', token)
   useEffect(()=> {
     const accesToken = getTokenFromUrl(window.location.hash);
     setToken(accesToken)

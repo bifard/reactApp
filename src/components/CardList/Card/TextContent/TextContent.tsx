@@ -10,7 +10,7 @@ export function TextContent() {
       <div className={styles.userLink}>
         <img  
           className={styles.avatar} 
-          src={authorAvatar || "https://cdn.dribbble.com/users/1247975/screenshots/16010207/media/969da6682bd27979407d6189521e62f8.jpg?compress=1&resize=1000x750" }
+          src={authorAvatar || "https://www.redditstatic.com/avatars/avatar_default_19_0DD3BB.png" }
           alt="avatar" 
         />
         <a href="#user-url" className={styles.username}>{author}</a>

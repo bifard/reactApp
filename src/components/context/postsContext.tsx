@@ -6,6 +6,7 @@ export const postsContext = React.createContext<IPostsData>([]);
 
 export function PostContextProvider({children}:{children: React.ReactNode}) {
   const [postsData] = usePostsData();
+  
   return(
       <postsContext.Provider value={postsData}>
        {children}

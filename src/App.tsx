@@ -14,7 +14,7 @@ import { PostContextProvider } from './components/context/postsContext';
 
 function AppComponent(){
   const [token] = useToken();
-  
+  console.log("AppComponent")
   return(
     <tokenContext.Provider value={token}>
       <UserContextProvider>

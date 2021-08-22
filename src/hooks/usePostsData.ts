@@ -20,26 +20,33 @@ export interface IPostsData extends Array<IPosts>{
 
 export function usePostsData(){
   const token = useToken();
+  
   const [posts, setPost] = useState<IPostsData>([])
   useEffect(()=> {
     axios.get('https://oauth.reddit.com/best.json?limit=30&sr_detail=true',{
       headers: { Authorization: `bearer ${token}`}
     })
     .then((res)=> {
+      console.log('res', res.data.data.children)
       const postData = res.data.data.children.map((item:any)=>{
         return {
           title:item.data.title,
-          preview: item.data.sr_detail.banner_img,
+          preview: (item.data.url.indexOf('.jpg') !== -1) ? item.data.url: undefined ,
           author: item.data.author,
           authorAvatar: item.data.sr_detail.icon_img,
-          created_utc:getHoursAgo(item.data.created_utc) ,
+          created_utc: getHoursAgo(item.data.created_utc) ,
           like: item.data.score,
           numComments: item.data.num_comments,
+          
         }
+        
       });
+      console.log('postData', postData)
       setPost(postData);
+      
     })
     .catch(console.log)
   }, [])
+  console.log("UsePostsData")
   return [posts];
 }
