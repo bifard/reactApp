@@ -1,7 +1,9 @@
 import React from 'react';
+import { useAuthorPostData } from '../../../../hooks/useAuthorPostData';
 import styles from './authorpost.css';
 
-export function AuthorPost({authorAvatar, author}: {authorAvatar?:string; author?:string}) {
+export function AuthorPost({author}: {authorAvatar?:string; author:string}) {
+  const [authorAvatar] = useAuthorPostData(author)
   return (
     <div className={styles.userLink}>
       <img  

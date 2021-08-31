@@ -9,7 +9,7 @@ export function Menu() {
   return (
     <div className={styles.menu}>
       <Dropdown  button ={ButtonMenu()}>
-          <MenuItems  />
+          <MenuItems />
       </Dropdown>
     </div>
     );

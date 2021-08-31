@@ -7,6 +7,22 @@
   flex-flow: row wrap;
   background-color:#FFFFFF;
   margin-top: 20px;
+  opacity: 0;
+  animation: ani 0.7s forwards;
+}
+@keyframes ani {
+  0% {opacity: 0;}
+  10% {opacity: 0.05;}
+  20% {opacity: 0.1;}
+  30% {opacity: 0.2;}
+  40% {opacity: 0.3;}
+  50% {opacity: 0.4;}
+  60% {opacity: 0.5;}
+  70% {opacity: 0.6;}
+  75% {opacity: 0.7;}
+  80% {opacity: 0.8;}
+  90% {opacity: 0.9;}
+  100% {opacity: 1;}
 }
 .card > *, .textContent > * {
   flex: 1 1 100%;

@@ -7,7 +7,7 @@ import { Preview } from './Preview';
 
 interface IPropsCard{
   title?:string;
-  author?:string;
+  author:string;
   preview?:string;
   authorID?: string;
   authorAvatar?: string;
@@ -15,13 +15,14 @@ interface IPropsCard{
   id?: string;
   like?: number;
   numComments?: number;
+  postID: string;
 }
 
-export function Card({title, author, preview, authorAvatar, created_utc, id, like, numComments}:IPropsCard) {
+export function Card({title, author, preview, authorAvatar, created_utc, id, like, numComments, postID}:IPropsCard) {
   
   return (
     <li className={styles.card}>
-      <TextContent  title ={title} author = {author} authorAvatar = {authorAvatar} created_utc = {created_utc} />
+      <TextContent  title ={title} author = {author} authorAvatar = {authorAvatar} created_utc = {created_utc} preview ={preview} postID = {postID}/>
       <Preview preview = {preview} />
       <Menu/>
       <Controls like = {like} numComments = {numComments}/>

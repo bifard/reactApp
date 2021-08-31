@@ -15,6 +15,7 @@ export function useUserData(){
       headers: { Authorization: `bearer ${token}`}
     })
     .then((res)=>{
+      console.log(res)
       const userData = res.data;
       setData({name: userData.name, iconImg: userData.icon_img});
     })

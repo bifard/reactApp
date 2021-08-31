@@ -1,4 +1,5 @@
 import React from 'react';
+import { CloseIcon } from '../../icon/CloseIcon';
 import { ClaimIcon } from '../../icon/menuIcon/ClaimIcon';
 import { CommentIcon } from '../../icon/menuIcon/CommentIcon';
 import { HideIcon } from '../../icon/menuIcon/HideIcon';
@@ -11,6 +12,7 @@ export enum EIcons{
   hide = 'HideIcon',
   save = 'SaveIcon',
   shared = 'SharedIcon',
+  close = 'CloseIcon',
 }
 interface IICONS {
   [n: string]: React.ReactElement;
@@ -27,6 +29,7 @@ export function Icon({name,size}:IIconProps) {
     'HideIcon': <HideIcon size={size}/>,
     'SaveIcon': <SaveIcon size={size}/>,
     'SharedIcon': <SharedIcon size={size}/>,
+    'CloseIcon' : <CloseIcon size={size}/>
   }
   return  ICONS[name]
 }

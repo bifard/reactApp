@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { generateId } from "../utils/js/generateRandomIndex";
 import { getHoursAgo } from "../utils/js/getHoursAgo";
 import { useToken } from "./useToken";
 
@@ -12,6 +13,8 @@ export interface IPosts{
   created_utc: number;
   like: number,
   numComments: number,
+  id?:string
+  postID: string;
 }
 export interface IPostsData extends Array<IPosts>{
   [K: number]: IPosts;
@@ -20,15 +23,13 @@ export interface IPostsData extends Array<IPosts>{
 
 export function usePostsData(){
   const token = useToken();
-  
   const [posts, setPost] = useState<IPostsData>([])
   useEffect(()=> {
-    axios.get('https://oauth.reddit.com/best.json?limit=30&sr_detail=true',{
+    axios.get('https://oauth.reddit.com/r/popular/best.json?sr_detail=true',{
       headers: { Authorization: `bearer ${token}`}
     })
     .then((res)=> {
-      console.log('res', res.data.data.children)
-      const postData = res.data.data.children.map((item:any)=>{
+      return res.data.data.children.map((item:any)=>{
         return {
           title:item.data.title,
           preview: (item.data.url.indexOf('.jpg') !== -1) ? item.data.url: undefined ,
@@ -37,16 +38,14 @@ export function usePostsData(){
           created_utc: getHoursAgo(item.data.created_utc) ,
           like: item.data.score,
           numComments: item.data.num_comments,
-          
+          postID: item.data.id
         }
-        
-      });
-      console.log('postData', postData)
-      setPost(postData);
-      
+      })
+      .map(generateId); 
     })
     .catch(console.log)
+    .then((data) => setPost(data))
+    
   }, [])
-  console.log("UsePostsData")
   return [posts];
 }
