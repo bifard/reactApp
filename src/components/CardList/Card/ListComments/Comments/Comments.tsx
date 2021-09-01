@@ -9,10 +9,11 @@ export interface ICommentsProps {
   postId: string;
   author: string;
   text: string;
+  commentName: string;
   replies: Array<StateType> | null;
   numReplies: number | null;
 }
-export function Comments({ text, author, postId, numReplies, replies }: ICommentsProps) {
+export function Comments({ text, author, postId, numReplies, replies, commentName}: ICommentsProps) {
   const [isOpenReplies, setIsOpenReplies] = useState(false);
 
   return (
@@ -27,12 +28,12 @@ export function Comments({ text, author, postId, numReplies, replies }: IComment
         </div>
         
         {isOpenReplies && replies && replies.map((item) => {
-          return <Comments key={item.commentId} commentId={item.commentId} author={item.author} text={item.text} postId={postId} numReplies={item.numReplies} replies={item.replies} />
+          return <Comments key={item.commentId} commentId={item.commentId} author={item.author} text={item.text} postId={postId} numReplies={item.numReplies} replies={item.replies} commentName={item.commentName} />
         })}
       </div>
 
       <div>
-          <ModalReply author={author}/>
+          <ModalReply author={author} commentName = { commentName }/>
       </div>
 
       <div className={styles.more}>

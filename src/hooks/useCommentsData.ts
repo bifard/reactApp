@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { tokenContext } from "../components/context/tokenContext";
 import { getHoursAgo } from "../utils/js/getHoursAgo";
 import { useToken } from "./useToken";
 
@@ -20,6 +21,7 @@ type ResDateType = {
   id: string;
   body: string;
   created_utc: number;
+  name: string;
   replies: {
     data: {
       children: [
@@ -34,6 +36,7 @@ export type StateType = {
   author: string;
   commentId: string;
   text: string;
+  commentName: string;
   created_utc: number;
   numReplies: number | null;
   replies: StateType[] | null
@@ -41,14 +44,14 @@ export type StateType = {
 }
 
 export function useCommentsData(postID: string) {
-  const token = useToken();
+  const token = useContext(tokenContext)
 
   useEffect(() => {
-    axios.get<ResponseType>(`https://oauth.reddit.com/comments/${postID}.json?`, {
+    axios.get<ResponseType>(`https://oauth.reddit.com/comments/${postID}.json?sr_detail=true`, {
       headers: { Authorization: `bearer ${token}` }
     })
       .then((res) => {
-        console.log(res.data[1].data.children)
+        console.log(res.data)
         return res.data[1].data.children;
       })
       .then((res) => {
@@ -66,6 +69,7 @@ function parseData(item:{data: ResDateType;}):StateType{
   item.data.replies?.data?.children.pop()
   const isReplies:boolean = item.data.replies?.data?.children && item.data.replies.data.children.length > 0;
   return {
+    commentName: item.data.name,
     author: item.data.author,
     commentId: item.data.id,
     text: item.data.body,

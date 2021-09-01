@@ -8,9 +8,9 @@ import { EIcons, Icon } from '../Icon';
 import { ReplyButton } from '../ToReply/ReplyButton';
 import styles from './modalreply.css';
 
-export function ModalReply({ author }: { author: string }) {
+export function ModalReply({ author, commentName }: { author: string, commentName:string }) {
   const token = useContext(tokenContext);
-  console.log(token)
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
@@ -22,17 +22,31 @@ export function ModalReply({ author }: { author: string }) {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    axios.post('https://oauth.reddit.com/api/comment',
-      {
-        headers: {
-          Authorization: `${token}`,
-        },
-        body: {
-          thing_id: 't1_pew2bd',
-          text: 'test',
-        }
+
+    const formData = new FormData();
+    formData.append('api_type', 'json');
+    formData.append('thing_id', commentName);
+    formData.append('text', ref.current!.value);
+    
+    axios({
+      method:'POST',
+      url:'https://oauth.reddit.com/api/comment.json',
+      data:formData,
+      headers:{
+        'Content-Type' : 'multipart/form-data',
+        Authorization: `bearer ${token}`,
       }
+    }
     )
+    .then((res)=> {
+      if(res.data.json.errors.length){
+        alert(res.data.json.errors[0][1])
+      }else{
+        alert('Ok!')
+        setModalIsOpen(false)
+      }
+    })
+    .catch(console.log)
   }
 
   return (

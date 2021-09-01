@@ -35,6 +35,7 @@ export function ListComments({postID}:{postID:string}) {
           text = {item.text}
           replies = {item.replies}
           commentId = {item.commentId}
+          commentName = {item.commentName}
           postId = {postID}
           numReplies = {item.numReplies}
         />})
