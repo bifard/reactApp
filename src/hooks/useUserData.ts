@@ -17,10 +17,7 @@ export function useUserData(){
       headers: { Authorization: `bearer ${token}`}
     })
     .then((res)=>{
-      console.log(res)
-      const userData = res.data;
-      console.log(userData,'asd')
-      dispatch(updateUserData({name: userData.name, imgSrc: userData.icon_img}))
+      dispatch(updateUserData({name: res.data.name, iconImg: res.data.icon_img}))
     })
     .catch(console.log)
   },[token]);

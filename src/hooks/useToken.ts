@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateToken } from "../store";
 import { getTokenFromUrl } from "../utils/js/getTokenFromUrl";
 
 
 export function useToken() {
-  const [token, setToken] = useState('');
+  const dispatch = useDispatch();
   useEffect(()=> {
     const accesToken = getTokenFromUrl(window.location.hash);
-    setToken(accesToken)
-  },[token])
-  return [token];
+    dispatch(updateToken(accesToken))
+  },[window.location.hash])
+
 }

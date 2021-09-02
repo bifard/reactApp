@@ -21,7 +21,7 @@ const initialState = {
 const UPDATE_USER_DATA = 'UPDATE_USERDATE';
 export const updateUserData: ActionCreator<AnyAction> = (userData) => ({
   type: UPDATE_USER_DATA,
-  userData
+  userData,
 })
 
 const UPDATE_COMMENT = 'UPDATE_COMMENT';

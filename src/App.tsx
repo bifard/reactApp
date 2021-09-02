@@ -5,26 +5,19 @@ import { Layout } from './components/Layout';
 import { Header } from './components/Header';
 import { Content } from './components/Content';
 import { CardList } from './components/CardList';
-import {useDispatch } from 'react-redux';
-import {updateToken } from './store';
 import { useToken } from './hooks/useToken';
 
 
 function AppComponent() {
-  const [token] = useToken();
-  const dispatch = useDispatch()
-  dispatch(updateToken(token))
-  
+  useToken()
   return (
- 
-            <Layout >
-              <Header />
-                <Content>
-                  <Route exact path="/" />
-                  <CardList></CardList>
-                </Content>
-            </Layout>
-
+     <Layout >
+      <Header />
+        <Content>
+          <Route exact path="/" />
+          <CardList></CardList>
+        </Content>
+    </Layout>
   );
 }
 
