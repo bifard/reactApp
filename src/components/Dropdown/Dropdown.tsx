@@ -14,13 +14,15 @@ const NOOP = () => {};
 export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOOP}: IDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
   const [clientY, setClientY] = useState(0);
+  const [clientX, setClientX] = useState(0);
 
 
   React.useEffect(()=> {setIsDropdownOpen(isOpen)},[isOpen])
   React.useEffect(()=> {()=> { isDropdownOpen ? onOpen() : onClose() }},[isDropdownOpen])
  
   const handelOpen = (event?: React.MouseEvent<Element, MouseEvent>) => {
-    setClientY(event?.clientY ? event?.pageY: 0);
+    setClientY(event?.clientY ? event?.pageY : 0);
+    setClientX(event?.clientX ? event?.pageX : 0);
     setIsDropdownOpen(!isDropdownOpen);
   }
 
@@ -28,7 +30,7 @@ export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOO
       <div onClick={handelOpen}>
         {button}
       </div>
-      {isDropdownOpen && <ListFroDropdown onClick={()=>setIsDropdownOpen(!isDropdownOpen)} children={children} clientY = {clientY}/>}
+      {isDropdownOpen && <ListFroDropdown onClick={()=>setIsDropdownOpen(!isDropdownOpen)} children={children} clientY = {clientY} clientX ={clientX}/>}
     </div>);
   
 }

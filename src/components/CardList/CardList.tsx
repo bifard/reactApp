@@ -1,9 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { postsContext } from '../context/postsContext';
+import React, { useEffect, useState } from 'react';
 import { Card } from './Card/Card';
 import styles from './cardlist.css';
 
 import { Loader } from '../Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, updatePosts } from '../../store';
+import { IPostsData, usePostsData } from '../../hooks/usePostsData';
 export interface IPostsCardList {
   title?:string;
   author?:string;
@@ -18,7 +20,8 @@ export interface IPostsCardList {
 }
 
 export function CardList() {
-  const posts = useContext(postsContext);
+  usePostsData();
+  const posts = useSelector<RootState, IPostsData>(state => state.postsData)
   const [isLoad, setIsLoad] = useState(false)
   
   useEffect(()=>{
@@ -34,7 +37,7 @@ export function CardList() {
           <Loader/>
         </div>
        }
-        { posts && posts.map((item)=>
+        { posts.length > 0 && posts.map((item)=>
             <Card
               key = {item.id} 
               title = {item.title} 

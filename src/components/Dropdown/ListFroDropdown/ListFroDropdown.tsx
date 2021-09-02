@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { stopPropagation } from '../../../utils/react/stopPropagation';
 import styles from './listfrodropdown.css';
 
-export function ListFroDropdown({clientY, children, onClick}:{clientY:number, children: React.ReactNode, onClick:()=> void}) {
+export function ListFroDropdown({clientY,clientX, children, onClick}:{clientX:number,clientY:number, children: React.ReactNode, onClick:()=> void}) {
   const positionStyle = {
     top: clientY,
+    left: clientX -20
   }
   const node = document.getElementById('dropdown_root');
 
@@ -26,7 +27,7 @@ export function ListFroDropdown({clientY, children, onClick}:{clientY:number, ch
   
   return ReactDOM.createPortal((
     <div ref={ref} className={styles.listContainer}  style={positionStyle} >
-        <div className={styles.list} onClick = {stopPropagation(onClick)}>
+        <div className={styles.list}  onClick = {stopPropagation(onClick)}>
           {children}
         </div>
     </div>

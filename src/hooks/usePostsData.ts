@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, updatePosts } from "../store";
 import { generateId } from "../utils/js/generateRandomIndex";
 import { getHoursAgo } from "../utils/js/getHoursAgo";
-import { useToken } from "./useToken";
 
 export interface IPosts{
   title:string;
@@ -22,9 +23,11 @@ export interface IPostsData extends Array<IPosts>{
 
 
 export function usePostsData(){
-  const token = useToken();
-  const [posts, setPost] = useState<IPostsData>([])
+  const token = useSelector<RootState, string>(state => state.token)
+
+  const dispatch = useDispatch();
   useEffect(()=> {
+ 
     axios.get('https://oauth.reddit.com/r/popular/best.json?sr_detail=true',{
       headers: { Authorization: `bearer ${token}`}
     })
@@ -43,9 +46,10 @@ export function usePostsData(){
       })
       .map(generateId); 
     })
+    .then((data) => {
+      dispatch(updatePosts(data))
+    })
     .catch(console.log)
-    .then((data) => setPost(data))
-    
+   
   }, [])
-  return [posts];
 }

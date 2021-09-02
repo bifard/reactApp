@@ -1,11 +1,20 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { BrowserRouter} from 'react-router-dom';
-
+import {createStore} from 'redux';
+import { Provider} from 'react-redux';
+import { rootReducer} from './store';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import  { App } from './App.tsx';
-
+const store = createStore(rootReducer, composeWithDevTools());
 
 
 window.addEventListener('load', () => {
-  ReactDom.render(<BrowserRouter><App/></BrowserRouter> , document.getElementById('react_root'));
+  ReactDom.render(
+    <BrowserRouter>
+      <Provider store={store}>
+          <App/>
+      </Provider>
+  </BrowserRouter> 
+  , document.getElementById('react_root'));
 });

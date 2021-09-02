@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { IconAnon } from '../../../../icon/IconAnon';
 import { Break } from '../../../Break';
 import { EColor, Text } from '../../../Text';

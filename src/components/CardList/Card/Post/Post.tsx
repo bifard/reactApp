@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { CommentForm } from '../CommentForm';
+import { CommentFormContainer } from '../../../CommentFormContainer';
 import { ListComments } from '../ListComments';
 import styles from './post.css';
 interface IPropsPost {
@@ -35,7 +35,7 @@ export function Post({ title, onClose, preview, postID }: IPropsPost) {
         <div className={styles.content}>
          <img  src={preview} alt="" />
         </div>
-        <CommentForm />
+        <CommentFormContainer />
         <ListComments postID = {postID}/>
       </div>
     </div>

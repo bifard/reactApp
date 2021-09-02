@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useCommentsData } from '../../../../hooks/useCommentsData';
 import { Loader } from '../../../Loader';
@@ -15,6 +14,7 @@ export function ListComments({postID}:{postID:string}) {
   const [isLoad, setIsLoad] = useState(false);
   useEffect(()=>{
     if(comments) setIsLoad(true)
+    
   },[comments])
   return (
 

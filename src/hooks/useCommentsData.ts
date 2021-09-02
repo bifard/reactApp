@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { tokenContext } from "../components/context/tokenContext";
+import React, {useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 import { getHoursAgo } from "../utils/js/getHoursAgo";
-import { useToken } from "./useToken";
 
 type ResponseType = [
   object,
@@ -44,10 +44,12 @@ export type StateType = {
 }
 
 export function useCommentsData(postID: string) {
-  const token = useContext(tokenContext)
-
+  const token = useSelector<RootState, string>(state => state.token)
+  
   useEffect(() => {
+    const cancelTokenSource = axios.CancelToken.source();
     axios.get<ResponseType>(`https://oauth.reddit.com/comments/${postID}.json?sr_detail=true`, {
+      cancelToken: cancelTokenSource.token,
       headers: { Authorization: `bearer ${token}` }
     })
       .then((res) => {
@@ -60,6 +62,9 @@ export function useCommentsData(postID: string) {
       .then((data)=> {
         return setComments(data)
       })
+      return ()=> {
+        cancelTokenSource.cancel();
+      }
   }, [])
   const [comments, setComments] = useState<StateType[]>();
   return [comments];
