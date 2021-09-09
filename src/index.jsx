@@ -1,12 +1,16 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { BrowserRouter} from 'react-router-dom';
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import { Provider} from 'react-redux';
-import { rootReducer} from './store';
+import { rootReducer} from './store/reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import  { App } from './App.tsx';
-const store = createStore(rootReducer, composeWithDevTools());
+import thunk from 'redux-thunk';
+
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(thunk)
+));
 
 
 window.addEventListener('load', () => {

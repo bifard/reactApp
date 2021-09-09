@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { RootState } from '../../../store/reducer';
 import { EIcons, Icon } from '../../Icon';
 import styles from './form.css';
 
 
 export function Form({ author, commentName, setModal }: { author: string, commentName: string, setModal: React.Dispatch<React.SetStateAction<boolean>> }) {
-  const token = useSelector<RootState, string>(state => state.token)
+  const token = useSelector<RootState, string>(state => state.saveToken.token)
   const ref = useRef<HTMLTextAreaElement>(null)
   const [value, setValue] = useState(`${author}, `)
 

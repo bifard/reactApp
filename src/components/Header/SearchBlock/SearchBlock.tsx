@@ -1,19 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { IUserData, useUserData } from '../../../hooks/useUserData';
-import { RootState } from '../../../store';
-
+import { RootState } from '../../../store/reducer';
 import styles from './searchblock.css';
 import { UserBlock } from './UserBlock';
 
 
 export function SearchBlock() {
-  useUserData();
-  const {iconImg, name} = useSelector<RootState, IUserData>(state => state.userData)
-  console.log(iconImg, name)
+  const {data, loading} = useUserData()
   return (
     <div className={styles.searchBlock}>
-      <UserBlock avatarSrc={iconImg} username={name}/>
+      <UserBlock avatarSrc={data.iconImg} username={data.name} loading ={loading}/>
     </div>
   );
 }

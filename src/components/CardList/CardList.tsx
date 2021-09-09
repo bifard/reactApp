@@ -4,7 +4,7 @@ import styles from './cardlist.css';
 
 import { Loader } from '../Loader';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, updatePosts } from '../../store';
+import { RootState, updatePosts } from '../../store/reducer';
 import { IPostsData, usePostsData } from '../../hooks/usePostsData';
 export interface IPostsCardList {
   title?:string;

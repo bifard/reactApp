@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, updatePosts } from "../store";
+import { RootState, updatePosts } from "../store/reducer";
 import { generateId } from "../utils/js/generateRandomIndex";
 import { getHoursAgo } from "../utils/js/getHoursAgo";
 
@@ -23,7 +23,7 @@ export interface IPostsData extends Array<IPosts>{
 
 
 export function usePostsData(){
-  const token = useSelector<RootState, string>(state => state.token)
+  const token = useSelector<RootState, string>(state => state.saveToken.token)
 
   const dispatch = useDispatch();
   useEffect(()=> {
