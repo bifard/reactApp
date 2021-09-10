@@ -23,11 +23,12 @@ export interface IPostsData extends Array<IPosts>{
 
 
 export function usePostsData(){
-  const token = useSelector<RootState, string>(state => state.saveToken.token)
-
+  const token = useSelector<RootState, string>(state => state.saveToken.token);
+  const isToken = useSelector<RootState, boolean>(state => state.saveToken.isToken)
+  console.log(token, 'token');
   const dispatch = useDispatch();
   useEffect(()=> {
- 
+    if(!isToken)  return;
     axios.get('https://oauth.reddit.com/r/popular/best.json?sr_detail=true',{
       headers: { Authorization: `bearer ${token}`}
     })
@@ -51,5 +52,5 @@ export function usePostsData(){
     })
     .catch(console.log)
    
-  }, [])
+  }, [token])
 }
